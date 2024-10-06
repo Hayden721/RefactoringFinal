@@ -1,0 +1,15 @@
+
+.login-container {
+    margin: 0 30% 0 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#login-form {
+    width: 300px;
+    height: 400px;
+    background-color: pink;
+}
