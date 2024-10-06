@@ -3,4 +3,43 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@refactoringprojectdb_high?TNS_ADMIN=/Users/apple/Documents/OCI-Wallet/Wallet_RefactoringProjectDB"/>
+        <property name="username" value="ADMIN"/>
+        <property name="password" value="Tkddyd123456"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 마이바티스 수행 객체 설정 (SqlSession) -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+        <!-- 스프링 빈으로 등록된 dataSource를 이용한 DB접속 정보 설정 -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+        <!-- mapper XML파일의 위치 설정-->
+        <property name="mapperLocations">
+            <array>
+                <!-- ** : 모든 폴더 구조 -->
+                <!-- * : 모든 단어 -->
+                <value>classpath:/mapper/*Mapper.xml</value>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 마이바티스를 이용하는 인턴페이스 설정(DAO설정) -->
+    <!-- Mapper XML의 newspace속성에 맞는 인터페이스를 찾는 패키지 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.refactoring.finalproject.**.dao"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
 </beans>

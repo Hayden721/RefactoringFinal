@@ -16,9 +16,18 @@
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
+        <!-- ViewResolver 동작 우선순위 -->
+        <beans:property name="order" value="1"/>
     </beans:bean>
 
+    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+
+        <!-- ViewResolver 동작 우선순위 -->
+        <!-- 낮은 value값이 우선 동작한다 -->
+        <beans:property name="order" value="0"/>
+
+    </beans:bean>
     <!-- 프로젝트 패키지이름 확인 -->
-    <context:component-scan base-package="com.refactoring.finalproject" />
+    <context:component-scan base-package="com.refactoring.finalproject.user" />
 
 </beans:beans>
