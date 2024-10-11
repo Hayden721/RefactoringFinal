@@ -1,4 +1,4 @@
-package com.refactoring.finalproject.dto;
+package com.refactoring.finalproject.user.dto;
 
 public class LoginDto {
 

@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <html>
 <head>
@@ -18,6 +16,12 @@
 </head>
 <body>
 <%-- header --%>
+<%
+//    boolean loginValid = (boolean)session.getAttribute("login");
+
+
+%>
+
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -29,8 +33,13 @@
             <div class="navbar-nav ">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                 <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                <c:if test="${!sessionScope.login}" >
+                    <a class="nav-link" href="<c:url value="/user/login"/>">로그인</a>
+                </c:if>
+
+                <c:if test="${sessionScope.login}" >
+                    <a class="nav-link" href="<c:url value="/user/logout"/>">로그아웃</a>
+                </c:if>
             </div>
         </div>
     </div>

@@ -1,7 +1,12 @@
 package com.refactoring.finalproject.user.service;
 
+
+import com.refactoring.finalproject.user.dto.LoginDto;
+
 public interface UserService {
 
 
-    String getTestData();
+
+
+    boolean getUserLoginVerifyByLoginDto(LoginDto loginDto);
 }

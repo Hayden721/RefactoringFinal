@@ -1,12 +1,17 @@
 package com.refactoring.finalproject.user.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-@Repository
-@Mapper
+import com.refactoring.finalproject.user.dto.LoginDto;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+
 public interface UserDao {
 
 
-    String selectTestData();
+
+
+    boolean selectUserDataByLoginDto(LoginDto loginDto);
 }

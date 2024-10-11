@@ -2,9 +2,13 @@ package com.refactoring.finalproject.user.controller;
 
 
 
-import com.refactoring.finalproject.dto.LoginDto;
+
+import com.refactoring.finalproject.user.dto.LoginDto;
 import com.refactoring.finalproject.user.service.UserService;
+
 import oracle.ucp.proxy.annotation.Post;
+
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -34,36 +39,36 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(HttpSession session, @ModelAttribute LoginDto loginDto, @RequestParam("idValue") String id, @RequestParam("pwValue") String pw) {
-//        session.setAttribute("username", session.getAttribute());
-        logger.info("loginDto1 : {}", loginDto.getIdValue());
-        logger.info("loginDto2 : {}", loginDto.getPwValue());
+    public String loginPost(HttpSession session, @ModelAttribute LoginDto loginDto) {
 
-        logger.info("login1 : {}", id);
-        logger.info("login2 : {}", pw);
+        logger.info("loginDto1 : {}", loginDto);
 
+        String username = loginDto.getIdValue();
 
-        logger.info("왜 안돼");
+        boolean userVerify = userService.getUserLoginVerifyByLoginDto(loginDto);
+
+        if(!userVerify) {
+            return "user/login";
+        }
+        session.setAttribute("user", username);
+        session.setAttribute("login", true);
         return "redirect:/";
+
     }
 
-    @GetMapping("/test")
-    public String getTest(Model model) {
-        logger.info("/test get!!");
-
-        String testData = userService.getTestData();
-        model.addAttribute("data", testData);
-        return "/member/test";
-    }
 
 
     @GetMapping("/register")
     public String register(Model model) {
-        return "";
+        return "user/register";
+
     }
 
     @GetMapping("/logout")
-    public String logout() {
-        return "";
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
+
+
 }

@@ -5,11 +5,19 @@
 
 </head>
 <body>
+<%
+    String id = (String)session.getAttribute("user");
+
+
+%>
+
 
     <%@ include file="./layouts/userPage/header.jsp" %>
     <div id="wrap">
         <div>
             메인 페이지
+
+            id : <%=id %>
         </div>
 
     </div>
