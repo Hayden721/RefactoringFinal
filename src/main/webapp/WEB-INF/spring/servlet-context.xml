@@ -4,9 +4,10 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:websocket="http://www.springframework.org/schema/websocket"
              xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
     <annotation-driven />
 
@@ -28,13 +29,37 @@
         <beans:property name="order" value="0"/>
 
     </beans:bean>
+
+
     <!-- 프로젝트 패키지이름 확인 -->
     <context:component-scan base-package="
         com.refactoring.finalproject.user.controller,
         com.refactoring.finalproject.user.service,
-
-
-" />
+        com.refactoring.finalproject.chat.controller,
+        com.refactoring.finalproject.chat.service,
+        com.refactoring.finalproject.interceptor,
+        com.refactoring.finalproject.config,
+        com.refactoring.finalproject.handler
+    " />
     <tx:annotation-driven proxy-target-class="true"/>
+
+
+    <!--  websocket  -->
+<!--    <websocket:handlers>-->
+<!--        <websocket:mapping handler="chattingHandler" path="/chatting"/>-->
+<!--        <websocket:handshake-interceptors>-->
+<!--            <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>-->
+<!--        </websocket:handshake-interceptors>-->
+<!--        <websocket:sockjs />-->
+
+<!--    </websocket:handlers>-->
+
+
+
+
+
+
+
+
 
 </beans:beans>

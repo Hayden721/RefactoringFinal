@@ -10,7 +10,7 @@
     <%--  jquery  --%>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-    <link href="../resources/css/commons/layout.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/commons/layout.css"/>" rel="stylesheet" type="text/css">
 
 
 </head>
@@ -35,10 +35,12 @@
                 <a class="nav-link" href="#">Features</a>
                 <c:if test="${!sessionScope.login}" >
                     <a class="nav-link" href="<c:url value="/user/login"/>">로그인</a>
+                    <a class="nav-link" href="<c:url value="/chat/room/list"/>">채팅</a>
                 </c:if>
 
                 <c:if test="${sessionScope.login}" >
                     <a class="nav-link" href="<c:url value="/user/logout"/>">로그아웃</a>
+                    <a class="nav-link" href="<c:url value="/chat/room/list"/>">채팅</a>
                 </c:if>
             </div>
         </div>
