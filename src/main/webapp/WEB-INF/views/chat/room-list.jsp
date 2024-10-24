@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: apple
-  Date: 24. 10. 17.
-  Time: 오후 5:17
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -40,20 +33,12 @@
               </c:otherwise>
           </c:choose>
 
-
-
-
-
-
-
-
-
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content">
 
-                  <form action="<c:url value="/chat/room/add"/>" method="post">
+                  <form action="<c:url value="/chat/room/create"/>" method="post">
 
                   <div class="modal-header">
                       <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>

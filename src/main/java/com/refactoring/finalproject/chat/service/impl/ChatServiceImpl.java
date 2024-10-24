@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -19,7 +20,6 @@ public class ChatServiceImpl implements ChatService {
     public ChatServiceImpl(ChatDao chatDao) {
         this.chatDao = chatDao;
     }
-
 
     @Override
     public List<ChatRoomDto> getChatRoomList() {
@@ -37,22 +37,20 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public void addChatroom(String chatroomName, String username) {
+    public void createChatroom(String chatroomName, String username) {
+        Long userNo = chatDao.selectUserNoByUsername(username);
+        ChatRoomDto chatRoomDto = new ChatRoomDto();
+        UUID uuid = UUID.randomUUID();
 
+        chatRoomDto.setChatroomName(chatroomName);
+        chatRoomDto.setUserNo(userNo);
+        chatRoomDto.setChatroomCode(uuid.toString());
 
-
-//        ChatRoomDto chatRoomDto = new ChatRoomDto();
-//
-//        chatRoomDto.setRoomId(chatroomName);
-//        chatRoomDto.setUserId(username);
-//
-//        Long userNo = chatDao.selectUserNoByUsername();
-
-//        chatDao.insertChatroom(chatRoomDto);
+        chatDao.insertChatroom(chatRoomDto);
     }
 
     @Override
-    public ChatRoomDto getChatRoomByRoomId(String roomNo) {
+    public ChatRoomDto getChatRoomByRoomId(Long roomNo) {
         return chatDao.selectChatRoom(roomNo);
     }
 }

@@ -32,7 +32,7 @@
       });
 
       // 채팅방 입장했을 때
-      stompClient.send("/app/join/" + roomNo, {}, JSON.stringify({sender: username}));
+      stompClient.send("/app/enter/" + roomNo, {}, JSON.stringify({sender: username}));
     });
   }
 
@@ -41,7 +41,7 @@
     if(messageContent && stompClient) {
       var chatMessage = {
         chatroomNo: roomNo,
-        sender: "User", // This should be replaced with actual user info
+        sender: username, // This should be replaced with actual user info
         chatMessage: messageContent,
 
       };

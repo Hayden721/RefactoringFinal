@@ -20,33 +20,33 @@
     </Appenders>
     <Loggers>
         <!-- Root Logger 설정 -->
-        <Root level="INFO" additivity="false">
+        <Root level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender"/>
             <AppenderRef ref="File_Appender"/>
         </Root>
 
         <!-- net.sf.log4jdbc: DB 로그를 WARN 레벨로 출력 (SQL 쿼리 로그 등) -->
-        <Logger name="net.sf.log4jdbc" level="WARN" additivity="false"/>
+        <Logger name="net.sf.log4jdbc" level="ERROR" additivity="false"/>
 
         <!-- Spring 관련 로그 레벨을 ERROR로 변경하여 오류도 기록되게 설정 -->
-        <Logger name="org.springframework" level="DEBUG" additivity="false">
+        <Logger name="org.springframework" level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender" />
             <AppenderRef ref="File_Appender"/>
         </Logger>
 
         <!-- 본인의 애플리케이션 패키지에 맞게 로거 추가 -->
-        <Logger name="com.refactoring.finalproject" level="DEBUG" additivity="false">
+        <Logger name="com.refactoring.finalproject" level="INFO" additivity="false">
             <AppenderRef ref="Console_Appender" />
             <AppenderRef ref="File_Appender"/>
         </Logger>
 
         <!-- Spring Beans 관련 로그 -->
-        <Logger name="org.springframework.beans" level="DEBUG" additivity="false">
+        <Logger name="org.springframework.beans" level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender" />
         </Logger>
 
         <!-- Spring Web 관련 로그 -->
-        <Logger name="org.springframework.web" level="DEBUG" additivity="false">
+        <Logger name="org.springframework.web" level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender" />
             <AppenderRef ref="File_Appender"/>
         </Logger>
@@ -57,7 +57,7 @@
         </Logger>
 
         <!-- Spring Core 관련 로그 -->
-        <Logger name="org.springframework.core" level="DEBUG" additivity="false">
+        <Logger name="org.springframework.core" level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender" />
         </Logger>
 
@@ -70,7 +70,7 @@
         <logger name="jdbc.sqltiming" level="DEBUG"/>
 
         <!-- log4jdbc 관련 로그를 WARN 레벨로 출력 -->
-        <Logger name="log4jdbc" level="DEBUG">
+        <Logger name="log4jdbc" level="WARN">
             <AppenderRef ref="Console_Appender"/>
         </Logger>
 

@@ -39,20 +39,12 @@
         com.refactoring.finalproject.chat.service,
         com.refactoring.finalproject.interceptor,
         com.refactoring.finalproject.config,
-        com.refactoring.finalproject.handler
+        com.refactoring.finalproject.handler,
     " />
     <tx:annotation-driven proxy-target-class="true"/>
 
 
-    <!--  websocket  -->
-<!--    <websocket:handlers>-->
-<!--        <websocket:mapping handler="chattingHandler" path="/chatting"/>-->
-<!--        <websocket:handshake-interceptors>-->
-<!--            <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>-->
-<!--        </websocket:handshake-interceptors>-->
-<!--        <websocket:sockjs />-->
 
-<!--    </websocket:handlers>-->
 
 
 

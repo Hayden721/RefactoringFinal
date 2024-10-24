@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.refactoring.finalproject.chat.dao.StompChatDao">
+    <select id="selectUserNoByUsername" parameterType="String" resultType="Long">
+        SELECT user_no
+        FROM user_tb
+        WHERE user_id = #{sender}
+
+    </select>
+
+
+
+    <insert id="insertMessage" parameterType="com.refactoring.finalproject.chat.dto.ChatMessageDto" >
+        INSERT INTO chat_message_tb(message_no, message_content, message_time, message_delete, message_sender, chatroom_no)
+        VALUES (message_no_seq.nextval, #{chatMessage}, #{messageDate}, 'N', #{senderNo}, #{chatroomNo})
+    </insert>
+</mapper>

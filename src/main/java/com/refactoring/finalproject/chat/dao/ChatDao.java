@@ -10,7 +10,7 @@ public interface ChatDao {
 
     void insertChatroom(ChatRoomDto chatRoomDto);
 
-    Long selectUserNoByUsername();
+    Long selectUserNoByUsername(String username);
 
-    ChatRoomDto selectChatRoom(String roomNo);
+    ChatRoomDto selectChatRoom(Long roomNo);
 }

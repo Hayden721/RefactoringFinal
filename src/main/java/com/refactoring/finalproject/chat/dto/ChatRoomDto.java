@@ -11,9 +11,9 @@ import java.util.UUID;
 public class ChatRoomDto {
 
     private String chatroomNo;
-    private String chatroomName;
-    private String chatroomCode;
-    private Long userNo;
+    private String chatroomName; // 채팅방 제목
+    private String chatroomCode; // 채팅방 UUID
+    private Long userNo; // 채팅방 생성자
 
     public ChatRoomDto() {
     }

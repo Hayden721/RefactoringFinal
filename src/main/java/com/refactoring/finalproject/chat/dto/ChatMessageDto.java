@@ -3,25 +3,28 @@ package com.refactoring.finalproject.chat.dto;
 
 import org.apache.ibatis.type.Alias;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
-@Alias("ChatMessageDto")
+
+
 public class ChatMessageDto {
     private Long chatroomNo;
     private String chatRoomId; // 채팅방 고유코드
     private String sender;
+    private Long senderNo;
     private String chatMessage; // 메시지
-    private Date messageDate; // 메시지 날짜
+    private LocalDateTime messageDate; // 메시지 날짜
 
 
     public ChatMessageDto() {
     }
 
-    public ChatMessageDto(Long chatroomNo, String chatRoomId, String sender, String chatMessage, Date messageDate) {
+    public ChatMessageDto(Long chatroomNo, String chatRoomId, String sender, Long senderNo,String chatMessage, LocalDateTime messageDate) {
         this.chatroomNo = chatroomNo;
         this.chatRoomId = chatRoomId;
         this.sender = sender;
+        this.senderNo = senderNo;
         this.chatMessage = chatMessage;
         this.messageDate = messageDate;
     }
@@ -58,11 +61,31 @@ public class ChatMessageDto {
         this.chatMessage = chatMessage;
     }
 
-    public Date getMessageDate() {
+    public LocalDateTime getMessageDate() {
         return messageDate;
     }
 
-    public void setMessageDate(Date messageDate) {
+    public Long getSenderNo() {
+        return senderNo;
+    }
+
+    public void setSenderNo(Long senderNo) {
+        this.senderNo = senderNo;
+    }
+
+    public void setMessageDate(LocalDateTime messageDate) {
         this.messageDate = messageDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ChatMessageDto{" +
+                "chatroomNo=" + chatroomNo +
+                ", chatRoomId='" + chatRoomId + '\'' +
+                ", sender='" + sender + '\'' +
+                ", senderNo=" + senderNo +
+                ", chatMessage='" + chatMessage + '\'' +
+                ", messageDate=" + messageDate +
+                '}';
     }
 }
