@@ -56,4 +56,14 @@ public class ChatRoomDto {
     public void setUserNo(Long userNo) {
         this.userNo = userNo;
     }
+
+    @Override
+    public String toString() {
+        return "ChatRoomDto{" +
+                "chatroomNo='" + chatroomNo + '\'' +
+                ", chatroomName='" + chatroomName + '\'' +
+                ", chatroomCode='" + chatroomCode + '\'' +
+                ", userNo=" + userNo +
+                '}';
+    }
 }

@@ -1,19 +1,14 @@
 package com.refactoring.finalproject.chat.controller;
 
-import com.refactoring.finalproject.chat.dao.ChatDao;
+import com.refactoring.finalproject.chat.dto.MessageRequest;
 import com.refactoring.finalproject.chat.dto.ChatRoomDto;
 import com.refactoring.finalproject.chat.service.ChatService;
-import org.apache.commons.logging.impl.Slf4jLogFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,12 +40,19 @@ public class ChatController {
     // 채팅방 입장
     @GetMapping("/room/{roomNo}")
     public String roomGet(@PathVariable("roomNo") Long roomNo, Model model){
+        logger.info("roomNOooo : {}", roomNo);
         // 접속하려는 채팅방의 정보 가지고 오지
         ChatRoomDto chatroom = chatService.getChatRoomByRoomId(roomNo);
+        logger.info("chatroom Info : {}", chatroom);
 
-        logger.info("/chat/room/get : get");
+        // 기존 채팅방에 있던 사람이라면 이전 채팅내역 가지고 오기 / 신규는 그냥 새로운 채팅창 if
 
+        List<MessageRequest> previousMessage = chatService.getPreviousMessage(roomNo);
+        logger.info("previousMessage : {}", previousMessage);
+
+        model.addAttribute("previousMessage", previousMessage);
         model.addAttribute("chatroom", chatroom);
+
         return "/chat/chat-room";
     }
 

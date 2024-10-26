@@ -1,5 +1,6 @@
 package com.refactoring.finalproject.chat.service;
 
+import com.refactoring.finalproject.chat.dto.MessageRequest;
 import com.refactoring.finalproject.chat.dto.ChatRoomDto;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface ChatService {
      * @return 찾으려는 채팅방의 정보
      */
     ChatRoomDto getChatRoomByRoomId(Long roomNo);
+
+    List<MessageRequest> getPreviousMessage(Long roomNo);
 }

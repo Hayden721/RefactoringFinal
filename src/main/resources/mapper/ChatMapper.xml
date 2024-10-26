@@ -22,6 +22,14 @@
         WHERE user_id = #{username}
     </select>
 
+    <select id="selectPreviousMessageByRoomNo" parameterType="Long" resultType="com.refactoring.finalproject.chat.dto.MessageRequest">
+        SELECT msg.message_content, msg.message_time, msg.message_delete, u.USER_ID AS message_sender , msg.chatroom_no
+        FROM chat_message_tb msg
+        INNER JOIN user_tb u
+        ON msg.message_sender = u.user_no
+        WHERE msg.chatroom_no = #{roomNo}
+    </select>
+
     <!--  INSERT  -->
     <insert id="insertChatroom" parameterType="com.refactoring.finalproject.chat.dto.ChatRoomDto">
         INSERT INTO chatroom_tb(CHATROOM_NO, CHATROOM_NAME, CHATROOM_CODE,USER_NO)

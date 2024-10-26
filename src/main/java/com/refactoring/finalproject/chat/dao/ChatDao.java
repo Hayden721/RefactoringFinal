@@ -1,5 +1,6 @@
 package com.refactoring.finalproject.chat.dao;
 
+import com.refactoring.finalproject.chat.dto.MessageRequest;
 import com.refactoring.finalproject.chat.dto.ChatRoomDto;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -13,4 +14,6 @@ public interface ChatDao {
     Long selectUserNoByUsername(String username);
 
     ChatRoomDto selectChatRoom(Long roomNo);
+
+    List<MessageRequest> selectPreviousMessageByRoomNo(Long roomNo);
 }

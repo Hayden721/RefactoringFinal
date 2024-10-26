@@ -1,6 +1,7 @@
 package com.refactoring.finalproject.chat.service.impl;
 
 import com.refactoring.finalproject.chat.dao.ChatDao;
+import com.refactoring.finalproject.chat.dto.MessageRequest;
 import com.refactoring.finalproject.chat.dto.ChatRoomDto;
 import com.refactoring.finalproject.chat.service.ChatService;
 import org.apache.logging.log4j.LogManager;
@@ -52,5 +53,10 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatRoomDto getChatRoomByRoomId(Long roomNo) {
         return chatDao.selectChatRoom(roomNo);
+    }
+
+    @Override
+    public List<MessageRequest> getPreviousMessage(Long roomNo) {
+        return chatDao.selectPreviousMessageByRoomNo(roomNo);
     }
 }

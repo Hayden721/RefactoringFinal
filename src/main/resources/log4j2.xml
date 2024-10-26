@@ -62,7 +62,7 @@
         </Logger>
 
         <!-- DB 관련 로그 -->
-        <logger name="jdbc.sqlresultsettable" level="DEBUG"/>
+        <logger name="jdbc.sqlresultsettable" level="ERROR"/>
         <logger name="jdbc.resultset" level="DEBUG"/>
         <logger name="jdbc.audit" level="OFF"/>
         <logger name="jdbc.connection" level="OFF"/>

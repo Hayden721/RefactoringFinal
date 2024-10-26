@@ -1,14 +1,15 @@
 package com.refactoring.finalproject.chat.service;
 
-import com.refactoring.finalproject.chat.dto.ChatMessageDto;
+import com.refactoring.finalproject.chat.dto.MessageDto;
 
 public interface StompChatService {
     /**
-     * 
-     * @param username
-     * @return
+     * 채팅방에 접속 기록 확인
+     * @param username - 유저 아이디
+     * @param roomNo - 방 번호
+     * @return 유저 존재 true / 존재하지 않으면 false
      */
-    boolean getUserPresenceByUserName(String username);
+    boolean getUserPresenceByUserName(String username, Long roomNo);
 
     /**
      * 채팅방에 접속한 유저 저장
@@ -18,6 +19,10 @@ public interface StompChatService {
     void saveEnterUser(String username, Long roomNo);
 
 
-
-    ChatMessageDto saveAndSendMessage(ChatMessageDto responseMessage);
+    /**
+     * 클라이언트가 보낸 메시지를 저장하고 채팅방에 전송한다.
+     * @param requestMessage - 클라이언트가 보낸 메시지 정보
+     * @return 클라이언트가 보낸 메시지 정보
+     */
+    MessageDto saveAndSendMessage(MessageDto requestMessage);
 }

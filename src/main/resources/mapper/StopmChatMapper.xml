@@ -10,10 +10,20 @@
 
     </select>
 
+    <select id="selectEnteredChatroomUserByUserNo" resultType="Boolean">
+        SELECT COUNT(*)
+        FROM CHATROOM_USER_TB
+        WHERE chatroom_no = #{roomNo} AND CHAT_USER_NO = #{userNo}
+    </select>
 
 
-    <insert id="insertMessage" parameterType="com.refactoring.finalproject.chat.dto.ChatMessageDto" >
+    <insert id="insertMessage" parameterType="com.refactoring.finalproject.chat.dto.MessageDto" >
         INSERT INTO chat_message_tb(message_no, message_content, message_time, message_delete, message_sender, chatroom_no)
-        VALUES (message_no_seq.nextval, #{chatMessage}, #{messageDate}, 'N', #{senderNo}, #{chatroomNo})
+        VALUES (message_no_seq.nextval, #{messageContent}, #{messageTime}, 'N', #{messageSender}, #{chatroomNo})
+    </insert>
+
+    <insert id="insertEnterUser">
+        INSERT INTO chatroom_user_tb(chatroom_user_no, chatroom_no, chat_user_no)
+        VALUES (chatroom_user_no_seq.nextval, #{roomNo}, #{userNo})
     </insert>
 </mapper>

@@ -12,9 +12,19 @@
 <%
   String username = (String)session.getAttribute("user");
 %>
-<h1>${room.roomName}</h1>
-<div id="chatMessages"></div>
-<input type="text" id="message" placeholder="Enter message">
+
+<h1>${chatroom.chatroomName}</h1>
+
+
+<div id="chatMessages">
+  <c:forEach items="${previousMessage}" var="msg">
+    <p><strong>${msg.messageSender} :</strong> ${msg.messageContent}</p>
+  </c:forEach>
+
+
+</div>
+
+<input type="text" id="messageDto" placeholder="Enter messageDto">
 <button onclick="sendMessage()">Send</button>
 
 <script>
@@ -32,26 +42,26 @@
       });
 
       // 채팅방 입장했을 때
-      stompClient.send("/app/enter/" + roomNo, {}, JSON.stringify({sender: username}));
+      stompClient.send("/app/enter/" + roomNo, {}, JSON.stringify({messageSender: username}));
     });
   }
 
   function sendMessage() {
-    var messageContent = $("#message").val().trim();
+    var messageContent = $("#messageDto").val().trim();
     if(messageContent && stompClient) {
       var chatMessage = {
         chatroomNo: roomNo,
-        sender: username, // This should be replaced with actual user info
-        chatMessage: messageContent,
+        sender: username,
+        messageContent: messageContent,
 
       };
       stompClient.send("/app/send/" + roomNo, {}, JSON.stringify(chatMessage));
-      $("#message").val('');
+      $("#messageDto").val('');
     }
   }
 
-  function showMessage(message) {
-    $("#chatMessages").append('<p><strong>' + message.sender + ':</strong> ' + message.chatMessage + '</p>');
+  function showMessage(messageDto) {
+    $("#chatMessages").append('<p><strong>' + messageDto.sender + ':</strong> ' + messageDto.messageContent + '</p>');
   }
 
   $(document).ready(function() {

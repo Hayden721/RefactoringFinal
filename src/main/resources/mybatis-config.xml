@@ -7,8 +7,12 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
         <setting name="logImpl" value="LOG4J2"/>
+
     </settings>
 
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+    </typeHandlers>
 
 
 </configuration>

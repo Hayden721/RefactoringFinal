@@ -1,7 +1,7 @@
 package com.refactoring.finalproject.chat.service.impl;
 
 import com.refactoring.finalproject.chat.dao.StompChatDao;
-import com.refactoring.finalproject.chat.dto.ChatMessageDto;
+import com.refactoring.finalproject.chat.dto.MessageDto;
 import com.refactoring.finalproject.chat.service.StompChatService;
 
 import org.slf4j.Logger;
@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Service
 public class StompChatImpl implements StompChatService {
@@ -24,42 +22,42 @@ public class StompChatImpl implements StompChatService {
 
     /**
      * 채팅방에 존재하는 유저들을 반환합니다.
-     * @param username :
+     *
+     * @param username -
+     * @param roomNo
      * @return
      */
     @Override
-    public boolean getUserPresenceByUserName(String username) {
+    public boolean getUserPresenceByUserName(String username, Long roomNo) {
 
-//        Long userNo = stompChatDao.selectUserNoByUsername(username);
-
-        return false;
-
-//                stompChatDao.selectEnteredChatroomUserBy();
+        Long userNo = stompChatDao.selectUserNoByUsername(username);
+        logger.info("selectUserNoByUsername: {}", userNo);
+        return stompChatDao.selectEnteredChatroomUserByUserNo(userNo, roomNo);
     }
 
     @Override
     public void saveEnterUser(String username, Long roomNo) {
-        boolean confirmUser =  stompChatDao.selectConfirmEnterUser(username, roomNo);
-//        try {
-//            if (confirmUser) {
-//                stompChatDao.insertEnterUser(username, roomNo);
-//            }
-//        }catch (Exception e){
-//
-//        }
+        Long userNo = stompChatDao.selectUserNoByUsername(username);
+        stompChatDao.insertEnterUser(userNo, roomNo);
+
+
 
     }
 
     @Override
-    public ChatMessageDto saveAndSendMessage(ChatMessageDto responseMessage) {
+    public MessageDto saveAndSendMessage(MessageDto responseMessage) {
         logger.info("responseMessage: {}", responseMessage);
         LocalDateTime now = LocalDateTime.now();
 
         try {
-
             // 날짜 추가
-            responseMessage.setMessageDate(now);
-            responseMessage.setSenderNo(stompChatDao.selectUserNoByUsername(responseMessage.getSender()));
+            responseMessage.setMessageTime(now);
+            // userNo 추가...
+            responseMessage.setMessageSender(stompChatDao.selectUserNoByUsername(responseMessage.getSender()));
+
+            logger.info("memberNo 찾기 : {}", stompChatDao.selectUserNoByUsername(responseMessage.getSender()));;
+
+            logger.info("set 한거 확인 : {}", responseMessage);
 
             int result = stompChatDao.insertMessage(responseMessage);
             logger.info("result: {}", result);
@@ -73,6 +71,7 @@ public class StompChatImpl implements StompChatService {
 
             return null;
         }
+
     }
 
 }
