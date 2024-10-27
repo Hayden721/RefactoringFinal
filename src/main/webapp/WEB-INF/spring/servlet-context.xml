@@ -43,15 +43,13 @@
     " />
     <tx:annotation-driven proxy-target-class="true"/>
 
-
-
-
-
-
-
-
-
-
-
+        <interceptors>
+            <!-- 개별 인터셉터 -->
+            <interceptor>
+            <!-- 인터셉터가 절용될 URL -->
+     			<mapping path="/chat/**"/>
+     			<beans:bean class="com.refactoring.finalproject.interceptor.LoginSessionInterceptor" />
+     		</interceptor>
+     	</interceptors>
 
 </beans:beans>

@@ -25,8 +25,18 @@
             <AppenderRef ref="File_Appender"/>
         </Root>
 
-        <!-- net.sf.log4jdbc: DB 로그를 WARN 레벨로 출력 (SQL 쿼리 로그 등) -->
-        <Logger name="net.sf.log4jdbc" level="ERROR" additivity="false"/>
+<!--        &lt;!&ndash; net.sf.log4jdbc: DB 로그를 WARN 레벨로 출력 (SQL 쿼리 로그 등) &ndash;&gt;-->
+<!--        <Logger name="net.sf.log4jdbc" level="ERROR" additivity="false"/>-->
+
+        <logger name="jdbc" level="OFF"/>
+
+        <logger name="jdbc.sqlonly" level="OFF"/>
+        <logger name="jdbc.sqltiming" level="DEBUG"/>
+        <logger name="jdbc.audit" level="OFF"/>
+        <logger name="jdbc.resultset" level="OFF"/>
+        <logger name="jdbc.resultsettable" level="DEBUG"/>
+        <logger name="jdbc.connection" level="OFF"/>
+
 
         <!-- Spring 관련 로그 레벨을 ERROR로 변경하여 오류도 기록되게 설정 -->
         <Logger name="org.springframework" level="ERROR" additivity="false">
@@ -59,19 +69,6 @@
         <!-- Spring Core 관련 로그 -->
         <Logger name="org.springframework.core" level="ERROR" additivity="false">
             <AppenderRef ref="Console_Appender" />
-        </Logger>
-
-        <!-- DB 관련 로그 -->
-        <logger name="jdbc.sqlresultsettable" level="ERROR"/>
-        <logger name="jdbc.resultset" level="DEBUG"/>
-        <logger name="jdbc.audit" level="OFF"/>
-        <logger name="jdbc.connection" level="OFF"/>
-        <logger name="jdbc.sqlonly" level="DEBUG"/>
-        <logger name="jdbc.sqltiming" level="DEBUG"/>
-
-        <!-- log4jdbc 관련 로그를 WARN 레벨로 출력 -->
-        <Logger name="log4jdbc" level="WARN">
-            <AppenderRef ref="Console_Appender"/>
         </Logger>
 
     </Loggers>

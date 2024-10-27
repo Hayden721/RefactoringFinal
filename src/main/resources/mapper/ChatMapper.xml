@@ -28,6 +28,7 @@
         INNER JOIN user_tb u
         ON msg.message_sender = u.user_no
         WHERE msg.chatroom_no = #{roomNo}
+        ORDER BY msg.message_time asc
     </select>
 
     <!--  INSERT  -->

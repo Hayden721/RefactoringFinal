@@ -16,6 +16,11 @@
 </head>
 <body>
 
+<script type="text/javascript">
+    <c:if test="${sessionScope.loginError}">
+    alert("로그인 상태가 아닙니다.");
+    </c:if>
+</script>
 
     <div class="login-container">
 
