@@ -66,7 +66,6 @@ public class ChatController {
         return "redirect:/chat/room/list";
     }
 
-    // 채팅방 삭제
 
 
 

@@ -9,7 +9,11 @@ public class MessageDto {
 
     private Long messageSender;
     private Long chatroomNo;
+    private MessageType type;
 
+    public enum MessageType {
+        CHAT, ENTER, EXIT
+    }
     public MessageDto() {
     }
 
@@ -19,6 +23,14 @@ public class MessageDto {
         this.messageTime = messageTime;
         this.messageSender = messageSender;
         this.chatroomNo = chatroomNo;
+    }
+
+    public MessageType getType() {
+        return type;
+    }
+
+    public void setType(MessageType type) {
+        this.type = type;
     }
 
     public String getMessageContent() {

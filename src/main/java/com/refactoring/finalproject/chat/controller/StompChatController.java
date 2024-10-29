@@ -37,24 +37,52 @@ public class StompChatController {
     // 입장 멘트
     @MessageMapping("/enter/{roomNo}")
     @SendTo("/topic/messages/{roomNo}")
-    public MessageDto chatEnter(@DestinationVariable Long roomNo, SimpMessageHeaderAccessor headerAccessor) {
+    public MessageDto chatEnter(@DestinationVariable Long roomNo, SimpMessageHeaderAccessor headerAccessor
+                                , @Payload MessageDto messageDto) {
+
+        logger.info("seder: {}", messageDto);
+        String username = messageDto.getSender();
         // 유저 닉네임 가져오기
-        String username = (String) headerAccessor.getSessionAttributes().get("user");
+//        String username = (String) headerAccessor.getSessionAttributes().get("user");
 
         boolean userPresence = stompChatService.getUserPresenceByUserName(username, roomNo);
         logger.info("userPresence: {}", userPresence);
 
         if(!userPresence) {
             stompChatService.saveEnterUser(username, roomNo);
-            MessageDto enterMessage = new MessageDto();
 
+            MessageDto enterMessage = new MessageDto();
+            enterMessage.setSender(username);
             enterMessage.setChatroomNo(roomNo);
             enterMessage.setMessageContent(username + "님이 입장했습니다.");
-
+            enterMessage.setType(MessageDto.MessageType.ENTER);
             return enterMessage;
         }
 
         return null;
+
+    }
+
+    @MessageMapping("/exit/{roomNo}")
+    @SendTo("/topic/messages/{roomNo}")
+    public MessageDto exitChatroom(@DestinationVariable Long roomNo, @Payload MessageDto messageDto) {
+//        String username = (String) headerAccessor.getSessionAttributes().get("user");
+        String username = messageDto.getSender();
+
+        MessageDto exitMessage = new MessageDto();
+
+        exitMessage.setSender(username);
+        exitMessage.setChatroomNo(roomNo);
+        exitMessage.setMessageContent(username + "님이 퇴장했습니다.");
+        exitMessage.setType(MessageDto.MessageType.EXIT);
+        logger.info("exitMessage : {}", exitMessage);
+
+        logger.info("messageMapping : /exit/room");
+
+        // 채팅방 유저 삭제
+        stompChatService.leaveChatroomByUsername(username, roomNo);
+
+        return exitMessage;
 
     }
 

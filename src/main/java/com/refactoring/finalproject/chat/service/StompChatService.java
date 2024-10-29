@@ -25,4 +25,6 @@ public interface StompChatService {
      * @return 클라이언트가 보낸 메시지 정보
      */
     MessageDto saveAndSendMessage(MessageDto requestMessage);
+
+    void leaveChatroomByUsername(String username, Long roomNo);
 }

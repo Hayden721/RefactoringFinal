@@ -26,4 +26,9 @@
         INSERT INTO chatroom_user_tb(chatroom_user_no, chatroom_no, chat_user_no)
         VALUES (chatroom_user_no_seq.nextval, #{roomNo}, #{userNo})
     </insert>
+
+    <delete id="deleteUserFromChatroom">
+        DELETE FROM chatroom_user_tb
+        WHERE chatroom_no = #{roomNo} AND chat_user_no = #{userNo}
+    </delete>
 </mapper>

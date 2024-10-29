@@ -17,4 +17,7 @@ public interface StompChatDao {
 
 
     void insertEnterUser(@Param("userNo") Long userNo, @Param("roomNo") Long roomNo);
+
+
+    void deleteUserFromChatroom(@Param("userNo") Long userNo, @Param("roomNo") Long roomNo);
 }

@@ -74,4 +74,11 @@ public class StompChatImpl implements StompChatService {
 
     }
 
+    @Override
+    public void leaveChatroomByUsername(String username, Long roomNo) {
+        Long userNo = stompChatDao.selectUserNoByUsername(username);
+
+        stompChatDao.deleteUserFromChatroom(userNo, roomNo);
+    }
+
 }
