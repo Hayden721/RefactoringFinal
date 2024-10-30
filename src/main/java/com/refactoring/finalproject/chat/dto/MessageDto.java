@@ -11,6 +11,7 @@ public class MessageDto {
     private Long chatroomNo;
     private MessageType type;
 
+
     public enum MessageType {
         CHAT, ENTER, EXIT
     }

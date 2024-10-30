@@ -31,6 +31,8 @@
         ORDER BY msg.message_time asc
     </select>
 
+
+
     <!--  INSERT  -->
     <insert id="insertChatroom" parameterType="com.refactoring.finalproject.chat.dto.ChatRoomDto">
         INSERT INTO chatroom_tb(CHATROOM_NO, CHATROOM_NAME, CHATROOM_CODE,USER_NO)

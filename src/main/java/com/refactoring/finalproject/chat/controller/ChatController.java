@@ -66,6 +66,21 @@ public class ChatController {
         return "redirect:/chat/room/list";
     }
 
+//    // 채팅방내 유저 ajax
+//    @GetMapping("/room/connected-user/{roomNo}")
+//    public String chatroomConnectUser(Model model, @PathVariable("roomNo") Long roomNo) {
+//
+//
+//        logger.info("connectUser : {}", connectUser);
+//
+//
+//        logger.info("/chatroomConnectUser");
+//
+//        model.addAttribute("connectUser", connectUser);
+//
+//        return "/ajax/chatroom-user";
+//
+//    }
 
 
 

@@ -3,6 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.refactoring.finalproject.chat.dao.StompChatDao">
+
+<!-- SELECT -->
     <select id="selectUserNoByUsername" parameterType="String" resultType="Long">
         SELECT user_no
         FROM user_tb
@@ -16,7 +18,15 @@
         WHERE chatroom_no = #{roomNo} AND CHAT_USER_NO = #{userNo}
     </select>
 
+    <select id="selectChatroomUsersByRoomNo" parameterType="Long" resultType="String">
+        SELECT ut.USER_ID as userId
+        FROM chatroom_user_tb ct
+        INNER JOIN USER_TB ut
+        ON ct.CHAT_USER_NO = ut.USER_NO
+        WHERE ct.CHATROOM_NO = #{roomNo}
+    </select>
 
+<!-- INSERT -->
     <insert id="insertMessage" parameterType="com.refactoring.finalproject.chat.dto.MessageDto" >
         INSERT INTO chat_message_tb(message_no, message_content, message_time, message_delete, message_sender, chatroom_no)
         VALUES (message_no_seq.nextval, #{messageContent}, #{messageTime}, 'N', #{messageSender}, #{chatroomNo})
@@ -26,7 +36,7 @@
         INSERT INTO chatroom_user_tb(chatroom_user_no, chatroom_no, chat_user_no)
         VALUES (chatroom_user_no_seq.nextval, #{roomNo}, #{userNo})
     </insert>
-
+<!-- DELETE -->
     <delete id="deleteUserFromChatroom">
         DELETE FROM chatroom_user_tb
         WHERE chatroom_no = #{roomNo} AND chat_user_no = #{userNo}

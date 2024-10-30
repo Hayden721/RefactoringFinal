@@ -29,4 +29,6 @@ public interface ChatService {
     ChatRoomDto getChatRoomByRoomId(Long roomNo);
 
     List<MessageRequest> getPreviousMessage(Long roomNo);
+
+    List<String> getChatroomUserByRoomNo(Long roomNo);
 }

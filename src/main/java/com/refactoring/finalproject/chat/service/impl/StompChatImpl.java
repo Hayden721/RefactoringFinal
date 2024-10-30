@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class StompChatImpl implements StompChatService {
@@ -79,6 +80,12 @@ public class StompChatImpl implements StompChatService {
         Long userNo = stompChatDao.selectUserNoByUsername(username);
 
         stompChatDao.deleteUserFromChatroom(userNo, roomNo);
+    }
+
+    @Override
+    public List<String> getChatroomUsersByRoomNo(Long roomNo) {
+        logger.info("채팅방 유저 리스트 : {}", stompChatDao.selectChatroomUsersByRoomNo(roomNo));
+        return stompChatDao.selectChatroomUsersByRoomNo(roomNo);
     }
 
 }

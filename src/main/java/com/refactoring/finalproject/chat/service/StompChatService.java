@@ -2,6 +2,8 @@ package com.refactoring.finalproject.chat.service;
 
 import com.refactoring.finalproject.chat.dto.MessageDto;
 
+import java.util.List;
+
 public interface StompChatService {
     /**
      * 채팅방에 접속 기록 확인
@@ -27,4 +29,11 @@ public interface StompChatService {
     MessageDto saveAndSendMessage(MessageDto requestMessage);
 
     void leaveChatroomByUsername(String username, Long roomNo);
+
+    /**
+     *  채팅방 유저들을 조회한다.
+     * @param roomNo - 현재 채팅방 번호
+     * @return 현재 채팅방에 존재하는 유저 리스트
+     */
+    List<String> getChatroomUsersByRoomNo(Long roomNo);
 }

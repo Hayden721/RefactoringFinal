@@ -23,9 +23,10 @@
 
 </div>
 
+
 <input type="text" id="message-input" placeholder="Enter messageDto">
 <button id="message-send-btn">Send</button>
-
+<div id="user-list"></div>
 <script>
   $(document).ready(function() {
     connect();
@@ -34,6 +35,7 @@
       sendMessage();
     })
 
+    console.log("roooooomNo : ", roomNo);
 
   });
 
@@ -51,9 +53,16 @@
       // 구독된 채팅방에만 메시지 뿌리기
       stompClient.subscribe('/topic/messages/' + roomNo, function(chatMessage) {
         showMessage(JSON.parse(chatMessage.body));
+
       });
 
-      // 채팅방 입장했을 때
+      stompClient.subscribe('/topic/users/' + roomNo, function(userListMsg) {
+        let users = JSON.parse(userListMsg.body);
+        userUpdateList(users);
+      });
+
+
+      // 채팅방 입장 시
       stompClient.send("/app/enter/" + roomNo,
               {},
               JSON.stringify({
@@ -61,9 +70,13 @@
               })
       );
 
+      // 채팅방 나가기
       $('#exit-chatroom').click(function () {
         leaveRoom();
-      })
+      });
+
+      // 유저 리스트 요청
+      stompClient.send("/app/user/" + roomNo, {}, {});
 
     });
   }
@@ -97,7 +110,6 @@
         messageElement = `<p class="text-center"><em>` +message.messageContent + `</em></p>`;
         break;
       case 'CHAT':
-      default:
         messageElement = `<p><strong>` + message.sender +  ` : </strong>` + message.messageContent+ `</p>`;
         break;
     }
@@ -106,7 +118,6 @@
   }
 
   function leaveRoom() {
-
     if (stompClient) {
       // 퇴장 메시지 전송
       const exitMessage= {
@@ -138,6 +149,17 @@
     }
   }
 
+  //
+  function userUpdateList(users) {
+    const $userListDiv = $('#user-list');
+    $userListDiv.empty();
+    $.each(users, function (index, user) {
+      const $userItem = $('<div></div>')
+        .addClass('user-item')
+              .text(user);
+      $userListDiv.append($userItem);
+    })
+  }
 
 </script>
 </body>

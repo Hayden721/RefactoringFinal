@@ -59,4 +59,9 @@ public class ChatServiceImpl implements ChatService {
     public List<MessageRequest> getPreviousMessage(Long roomNo) {
         return chatDao.selectPreviousMessageByRoomNo(roomNo);
     }
+
+    @Override
+    public List<String> getChatroomUserByRoomNo(Long roomNo) {
+        return chatDao.selectChatroomUserByRoomNo(roomNo);
+    }
 }

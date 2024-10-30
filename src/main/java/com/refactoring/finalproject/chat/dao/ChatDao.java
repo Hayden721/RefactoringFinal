@@ -16,4 +16,6 @@ public interface ChatDao {
     ChatRoomDto selectChatRoom(Long roomNo);
 
     List<MessageRequest> selectPreviousMessageByRoomNo(Long roomNo);
+
+    List<String> selectChatroomUserByRoomNo(Long roomNo);
 }
