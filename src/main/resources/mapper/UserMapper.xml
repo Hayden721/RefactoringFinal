@@ -14,4 +14,18 @@
         WHERE user_id = #{idValue}
             AND user_pw = #{pwValue}
     </select>
+
+    <select id="selectUserNoByUsername" resultType="Long">
+        SELECT user_no
+        FROM user_tb
+        WHERE user_id = #{username}
+    </select>
+
+    <select id="selectSubChatroomByUserNo" resultType="com.refactoring.finalproject.user.dto.SubChatroomDto">
+        SELECT cut.CHATROOM_NO, ct.CHATROOM_NAME, ct.CHATROOM_CODE
+        FROM chatroom_user_tb cut
+        INNER JOIN CHATROOM_TB ct
+        ON cut.CHATROOM_NO = ct.CHATROOM_NO
+        WHERE cut.CHAT_USER_NO = #{userNo}
+    </select>
 </mapper>

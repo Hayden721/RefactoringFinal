@@ -27,7 +27,7 @@
               <c:otherwise>
                   <ul>
                       <c:forEach items="${roomList}" var="room">
-                          <li><a href="/chat/room/${room.chatroomNo}">${room.chatroomName}</a></li>
+                          <li><a href="/chat/room/${room.chatroomNo}" target="_blank">${room.chatroomName}</a></li>
                       </c:forEach>
                   </ul>
               </c:otherwise>

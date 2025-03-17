@@ -3,10 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.refactoring.finalproject.chat.dao.ChatDao">
-    <!--  SELECT  -->
+
+<!--  SELECT  -->
     <select id="selectChatRoomList" resultType="com.refactoring.finalproject.chat.dto.ChatRoomDto">
         SELECT *
         FROM chatroom_tb
+
     </select>
 
     <select id="selectChatRoom" resultType="com.refactoring.finalproject.chat.dto.ChatRoomDto">
@@ -32,8 +34,7 @@
     </select>
 
 
-
-    <!--  INSERT  -->
+<!--  INSERT  -->
     <insert id="insertChatroom" parameterType="com.refactoring.finalproject.chat.dto.ChatRoomDto">
         INSERT INTO chatroom_tb(CHATROOM_NO, CHATROOM_NAME, CHATROOM_CODE,USER_NO)
         VALUES (chatroom_no_seq.nextval, #{chatroomName}, #{chatroomCode},#{userNo})

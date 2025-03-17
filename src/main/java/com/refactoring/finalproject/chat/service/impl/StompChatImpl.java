@@ -24,8 +24,8 @@ public class StompChatImpl implements StompChatService {
     /**
      * 채팅방에 존재하는 유저들을 반환합니다.
      *
-     * @param username -
-     * @param roomNo
+     * @param username - 사용자 ID
+     * @param roomNo - 채팅방 번호
      * @return
      */
     @Override
@@ -40,9 +40,6 @@ public class StompChatImpl implements StompChatService {
     public void saveEnterUser(String username, Long roomNo) {
         Long userNo = stompChatDao.selectUserNoByUsername(username);
         stompChatDao.insertEnterUser(userNo, roomNo);
-
-
-
     }
 
     @Override

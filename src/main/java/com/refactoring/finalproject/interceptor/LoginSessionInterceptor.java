@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginSessionInterceptor implements HandlerInterceptor {
-    // 유저의 세션 체크
 
+    // 유저의 세션 체크
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getSession().getAttribute("login") == null) {

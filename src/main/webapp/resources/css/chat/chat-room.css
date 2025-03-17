@@ -1,0 +1,14 @@
+#chat-messages {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background-color: antiquewhite;
+}
+
+.msg {
+
+}
+
+.my-msg {
+    float: right;
+}

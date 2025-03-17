@@ -15,6 +15,7 @@ public class MessageDto {
     public enum MessageType {
         CHAT, ENTER, EXIT
     }
+
     public MessageDto() {
     }
 

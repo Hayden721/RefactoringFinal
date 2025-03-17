@@ -30,7 +30,6 @@ public class StompChatController {
         this.stompChatService = stompChatService;
         this.messagingTemplate = messagingTemplate;
 
-
     }
 
 
@@ -47,8 +46,7 @@ public class StompChatController {
     // 입장 멘트
     @MessageMapping("/enter/{roomNo}")
     @SendTo("/topic/messages/{roomNo}")
-    public MessageDto chatEnter(@DestinationVariable Long roomNo, SimpMessageHeaderAccessor simpMessageHeaderAccessor
-                                , @Payload MessageDto messageDto) {
+    public MessageDto chatEnter(@DestinationVariable Long roomNo, @Payload MessageDto messageDto) {
 
         logger.info("seder: {}", messageDto);
         String username = messageDto.getSender();

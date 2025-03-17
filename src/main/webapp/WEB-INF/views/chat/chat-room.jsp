@@ -7,6 +7,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/chat/chat-room.css"/>
 </head>
 <body>
 <%
@@ -18,11 +20,20 @@
 
 <div id="chat-messages">
   <c:forEach items="${previousMessage}" var="msg">
-    <p><strong>${msg.messageSender} :</strong> ${msg.messageContent}</p>
+    <c:choose>
+      <%-- 본인이 쓴 메시지 --%>
+      <c:when test="${msg.messageSender == sessionScope.user}">
+        <div><pre class="my-msg">${msg.messageContent}</pre></div>
+      </c:when>
+      <%-- 남이 쓴 메시지 --%>
+      <c:otherwise>
+        <div><pre class="msg"><strong>${msg.messageSender} :</strong> ${msg.messageContent}</pre></div>
+      </c:otherwise>
+
+    </c:choose>
   </c:forEach>
 
 </div>
-
 
 <input type="text" id="message-input" placeholder="Enter messageDto">
 <button id="message-send-btn">Send</button>
@@ -110,7 +121,12 @@
         messageElement = `<p class="text-center"><em>` +message.messageContent + `</em></p>`;
         break;
       case 'CHAT':
-        messageElement = `<p><strong>` + message.sender +  ` : </strong>` + message.messageContent+ `</p>`;
+        // 내가
+        if(message.sender === usernameSession) {
+          messageElement = `<div><pre class="my-msg"></strong>` + message.messageContent+ `</strong></pre></div>`;
+        }else {
+          messageElement = `<div><pre class="msg"><strong>` + message.sender + ` : </strong>` + message.messageContent + `</pre></div>`;
+        }
         break;
     }
 

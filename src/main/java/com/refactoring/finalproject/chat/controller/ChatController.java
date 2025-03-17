@@ -25,7 +25,7 @@ public class ChatController {
 
     // 채팅리스트
     @GetMapping("/room/list")
-    public String roomListGet(Model model){
+    public String getRoomList(Model model) {
         logger.info("/chat/room/list : get");
 
         try {
@@ -39,7 +39,7 @@ public class ChatController {
 
     // 채팅방 입장
     @GetMapping("/room/{roomNo}")
-    public String roomGet(@PathVariable("roomNo") Long roomNo, Model model){
+    public String getRoom(@PathVariable("roomNo") Long roomNo, Model model) {
         logger.info("roomNOooo : {}", roomNo);
         // 접속하려는 채팅방의 정보 가지고 오지
         ChatRoomDto chatroom = chatService.getChatRoomByRoomId(roomNo);
@@ -56,36 +56,15 @@ public class ChatController {
         return "/chat/chat-room";
     }
 
-//    // 채팅방 생성
+    // 채팅방 생성
     @PostMapping("/room/create")
-    public String roomAddPost(@RequestParam("chatroomName") String chatroomName, @RequestParam("username") String username){
+    public String postRoomAdd(@RequestParam("chatroomName") String chatroomName, @RequestParam("username") String username) {
         logger.info("chatroomName : {}", chatroomName);
         logger.info("username : {}", username);
         chatService.createChatroom(chatroomName, username);
 
         return "redirect:/chat/room/list";
     }
-
-//    // 채팅방내 유저 ajax
-//    @GetMapping("/room/connected-user/{roomNo}")
-//    public String chatroomConnectUser(Model model, @PathVariable("roomNo") Long roomNo) {
-//
-//
-//        logger.info("connectUser : {}", connectUser);
-//
-//
-//        logger.info("/chatroomConnectUser");
-//
-//        model.addAttribute("connectUser", connectUser);
-//
-//        return "/ajax/chatroom-user";
-//
-//    }
-
-
-
-
-
 
 
 }

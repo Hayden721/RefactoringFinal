@@ -31,8 +31,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
                 <c:if test="${!sessionScope.login}" >
                     <a class="nav-link" href="<c:url value="/user/login"/>">로그인</a>
                     <a class="nav-link" href="<c:url value="/chat/room/list"/>">채팅</a>
@@ -41,6 +39,7 @@
                 <c:if test="${sessionScope.login}" >
                     <a class="nav-link" href="<c:url value="/user/logout"/>">로그아웃</a>
                     <a class="nav-link" href="<c:url value="/chat/room/list"/>">채팅</a>
+                    <a class="nav-link" href="<c:url value="/user/mypage"/>">마이페이지</a>
                 </c:if>
             </div>
         </div>

@@ -1,28 +1,18 @@
-package com.refactoring.finalproject.chat.dto;
+package com.refactoring.finalproject.user.dto;
 
-import org.apache.ibatis.type.Alias;
-import org.springframework.web.socket.WebSocketSession;
+public class SubChatroomDto {
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+    private Long chatroomNo; // 방번호
+    private String chatroomName; // 방 제목
+    private String chatroomCode; // 방 코드
 
-
-public class ChatRoomDto {
-
-    private Long chatroomNo;
-    private String chatroomName; // 채팅방 제목
-    private String chatroomCode; // 채팅방 UUID
-    private Long userNo; // 채팅방 생성자
-
-    public ChatRoomDto() {
+    public SubChatroomDto() {
     }
 
-    public ChatRoomDto(Long chatroomNo, String chatroomName, String chatroomCode, Long userNo) {
+    public SubChatroomDto(Long chatroomNo, String chatroomName, String chatroomCode) {
         this.chatroomNo = chatroomNo;
         this.chatroomName = chatroomName;
         this.chatroomCode = chatroomCode;
-        this.userNo = userNo;
     }
 
     public Long getChatroomNo() {
@@ -49,21 +39,12 @@ public class ChatRoomDto {
         this.chatroomCode = chatroomCode;
     }
 
-    public Long getUserNo() {
-        return userNo;
-    }
-
-    public void setUserNo(Long userNo) {
-        this.userNo = userNo;
-    }
-
     @Override
     public String toString() {
-        return "ChatRoomDto{" +
+        return "SubChatroomDto{" +
                 "chatroomNo=" + chatroomNo +
                 ", chatroomName='" + chatroomName + '\'' +
                 ", chatroomCode='" + chatroomCode + '\'' +
-                ", userNo=" + userNo +
                 '}';
     }
 }
